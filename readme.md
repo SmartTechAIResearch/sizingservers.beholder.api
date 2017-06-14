@@ -53,6 +53,8 @@ Set Authorization to enable or disable the requirement of an API key for communi
 
 Only for a Release build, this setting is used. For a Debug build, communication always works without a key.
 
+P.S.: This security measure is a bit silly should be replaced by something better if you need it. If not, leave it as is.
+
 ### beholder.db
 beholder.db contains two usable tables:
 
