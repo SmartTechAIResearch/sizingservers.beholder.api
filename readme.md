@@ -15,14 +15,48 @@ solution.
 Furthermore, the **Entity framework** is used to store system information agents send in a **SQLite3** database: beholder.db.
 
 ## Overview of the API
-Check the XML documentation in the Build / comments in the code. The ApiController class handles all communication.
+Communication happens over HTTP, using following structured url:
+
+    http://< insert ip / fqdn here >:< port: default 5000 >/api/< call >?< params >
+
+The ApiController class handles all communication and following calls are available:
+
+* GET Ping  
+  Returns "pong" if the api is reachable.
+  
+  Example: *GET http://localhost:5000/api/ping*
+  
+* GET List, params apiKey  
+  Returns all stored system informations.
+  
+  More on the API key later.
+  
+  Example: *GET http://localhost:5000/api/list?apiKey=...*
+  
+* POST Report, params apiKey, body systemInformation  
+  To store a new system information in the database or replace an existing one using the hostname.
+  
+  System information has a model you can find in the solution. It should be serialized as JSON in the body of the call.
+  
+  Example: *POST http://localhost:5000/api/report?apiKey=...*
+  
+* PUT CleanOlderThan, params days apiKey: Cleans up old system informations so the database represents reality.
+
+  Example: *PUT http://localhost:5000/api/cleanolderthan?days=1&apiKey=...*
+   
+* PUT Clear, params apiKey: Clear (PUT) all system informations in the database.
+
+  Example: *PUT http://localhost:5000/api/clear?apiKey=..*.
+  
+  
+Furthermore, check the XML documentation in the Build / comments in the code.
 
 ## Build
 You need the SDK (<https://www.microsoft.com/net/download/core#/sdk>) to build the source.
 
 You need to be connected to the Internet for restoring NuGet packages.
 
-Execute *build DEBUG.cmd* or *build RELEASE.cmd*:
+Execute *build DEBUG.cmd*, *build RELEASE.cmd* or the *sh*'s for when building on Linux:
 
     rmdir /S /Q Build\Debug
     cd sizingservers.beholder.api

@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace sizingservers.beholder.api.Controllers {
     /// <summary>
-    /// <para>Holds all actions related to this api. Use url/ap/{action}.</para> 
+    /// <para>Holds all actions related to this api. Use url/api/{action}.</para> 
     /// <para>Data is represented as JSON.</para> 
     /// </summary>
     public class ApiController : Controller {
