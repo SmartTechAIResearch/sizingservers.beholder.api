@@ -103,7 +103,66 @@ SystemInformations is populated automatically by the use of the API. The timesta
       "server.urls": "http://0.0.0.0:5000;http://::1:5000"
     }
 
-Here you can define the used endpoints when running standalone: a ASP.Net Core Web App is just a console application containing a http server (Kestrel). If you want https, host it on a web server like IIS, Nginx, Apache.
+Here you can define the used endpoints when running standalone: a ASP.Net Core Web App is just a console application containing a http server (Kestrel).
+
+If you want HTTPS, get a certificate from e.g. [letsencrypt.org](letsencrypt.org) and configure a real web server like IIS, Nginx, Apache as a reverse proxy.
+
+(SSL certificates can only be hard-coded or loaded from an external file via a work-around for Kestrel (build-in http server in an ASP.Net core app) at the moment.)
+
+### HTTPS reverse proxy Nginx (Ubuntu 16.04)
+
+Use following commands.
+
+    sudo apt-get install nginx
+    sudo nano /etc/nginx/sites-available/aspnetcore
+    
+Add following content to the newly created config
+
+    server {
+        listen 443 ssl;    
+        ssl_certificate PATH_TO_CERTIFICATE/CERTIFICATE_NAME.pem;
+        ssl_certificate_key PATH_TO_PRIVATE_KEY/PRIVATE_KEY.pem;
+
+        location / {
+            proxy_pass http://localhost:5000;
+        }
+    }
+
+Execute following commands.
+
+    cd /etc/nginx/sites-enabled
+    sudo ln -s /etc/nginx/sites-available/aspnetcore
+    sudo nginx -s reload
+
+### HTTPS reverse proxy Apache (Ubuntu 16.04)
+
+Use following commands.
+
+    sudo apt-get install apache2
+    sudo a2enmod proxy_http
+    sudo a2enmod proxy_connect
+    sudo nano /etc/apache2/sites-available/aspnetcore
+    
+Add following content to the newly created config
+    
+    <VirtualHost *:443>
+        ServerAdmin info@sizingservers
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+        SSlEngine On
+        SSLCertificateFile    PATH_TO_CERTIFICATE/CERTIFICATE_NAME.pem
+        SSLCertificateKeyFile PATH_TO_PRIVATE_KEY/PRIVATE_KEY.pem
+        ProxyPreserveHost On
+        ProxyPass / http://localhost:5000/
+        ProxyPassReverse / http://localhost:5000/
+        ServerName localhost
+    </VirtualHost>
+
+Execute following commands.
+
+    cd /etc/apache2/sites-enabled
+    sudo ln -s /etc/apache2/sites-available/aspnetcore
+    sudo apache2 reload
 
 ## Run
 You need the .NET core runtime (<https://www.microsoft.com/net/download/core#/runtime>) to run the build: 1.1.2 at the time of writing.
