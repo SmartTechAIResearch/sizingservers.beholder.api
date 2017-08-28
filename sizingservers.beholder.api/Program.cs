@@ -21,7 +21,7 @@ namespace sizingservers.beholder.api {
         public static void Main(string[] args) {
             var config = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("hosting.json", optional: true)
+                .AddJsonFile("hosting.json", optional: false)
                 .Build();
 
             var host = new WebHostBuilder()
