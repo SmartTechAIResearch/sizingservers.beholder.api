@@ -7,9 +7,9 @@ cd sizingservers.beholder.api
 dotnet restore
 dotnet publish -c Debug
 # If you do not specify the framework following command will not work.
-dotnet ef --framework netcoreapp1.1 --configuration Debug database update
+dotnet ef --framework netcoreapp2.0 --configuration Debug database update
 cd ..
-mv -f Build/Debug/netcoreapp1.1/publish/* Build/Debug/netcoreapp1.1
-rmdir Build/Debug/netcoreapp1.1/publish
-mv Build/Debug/netcoreapp1.1/* Build/Debug
-rmdir Build/Debug/netcoreapp1.1
+mv -f Build/Debug/netcoreapp2.0/publish/* Build/Debug/netcoreapp2.0
+rmdir Build/Debug/netcoreapp2.0/publish
+mv Build/Debug/netcoreapp2.0/* Build/Debug
+rmdir Build/Debug/netcoreapp2.0
