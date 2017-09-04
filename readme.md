@@ -10,7 +10,7 @@ This project is part of a computer hardware inventorization solution, together w
 Agents are installed on the computers you want to inventorize. These communicate with the REST API which stores hardware info. The front-end app visualizes that info.
 
 ## Languages, libraries, tools and technologies used
-The API is a **C# ASP.NET Core Web Application** (**dotnet core 1.1**: target framework netcoreapp1.1) contained within a **Visual Studio 2017**
+The API is a **C# ASP.NET Core Web Application** (**dotnet core 2.0**: target framework netcoreapp2.0) contained within a **Visual Studio 2017**
 solution.  
 Furthermore, the **Entity framework** is used to store system information agents send in a **SQLite3** database: beholder.db.
 
@@ -52,7 +52,7 @@ The ApiController class handles all communication and following calls are availa
 Furthermore, check the XML documentation in the Build / comments in the code.
 
 ## Build
-You need the SDK (<https://www.microsoft.com/net/download/core#/sdk>) to build the source.
+You need the SDK (<https://www.microsoft.com/net/download/core#/sdk>) to build the source and the .Net framework SDK (<https://www.microsoft.com/en-us/download/details.aspx?id=55168>) if building on Windows.
 
 You need to be connected to the Internet for restoring NuGet packages.
 
@@ -165,12 +165,12 @@ Execute following commands.
     sudo apache2 reload
 
 ## Run
-You need the .NET core runtime (<https://www.microsoft.com/net/download/core#/runtime>) to run the build: 1.1.2 at the time of writing.
+You need the .NET core runtime (<https://www.microsoft.com/net/download/core#/runtime>) to run the build: 2.0 at the time of writing.
 
 You need the .NET framework on Windows, but you have that by default.
 
 Execute run.cmd or run.sh or host it on a web server: <https://docs.microsoft.com/en-us/aspnet/core/publishing/>
 
-Alternatively you can run it as a service / daemon. Use NSSM for Windows or the start-as-daemon script for Linux.
+Alternatively you can run it as a service / daemon. Use NSSM for Windows or the start-as-daemon script / screen for Linux.
 
 To check if it works you can use Postman for instance.
