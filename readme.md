@@ -40,11 +40,16 @@ The ApiController class handles all communication and following calls are availa
   
   Example: *POST http://localhost:5000/api/report?apiKey=...*
   
-* PUT CleanOlderThan, params days apiKey: Cleans up old system informations so the database represents reality.
+* DELETE Remove, params apiKey hostname  
+  Removes the system information having the given hostname, if any.
+  
+* PUT CleanOlderThan, params days apiKey  
+  Cleans up old system informations so the database represents reality.
 
   Example: *PUT http://localhost:5000/api/cleanolderthan?days=1&apiKey=...*
    
-* PUT Clear, params apiKey: Clear (PUT) all system informations in the database.
+* PUT Clear, params apiKey  
+  Clear all system informations in the database.
 
   Example: *PUT http://localhost:5000/api/clear?apiKey=..*.
   

@@ -72,6 +72,31 @@ namespace sizingservers.beholder.api.Controllers {
             return CreatedAtAction("list", null); //Return a 201. Tell the client that the post did happen and were it can be requested.
         }
         /// <summary>
+        /// Removes the system information having the given hostname, if any.
+        /// </summary>
+        /// <param name="apiKey"></param>
+        /// <param name="hostname"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        public IActionResult Remove([FromQuery]string apiKey, [FromQuery]string hostname) {
+            if (!Authorize(apiKey))
+                return Unauthorized();
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            using (var db = new DBContext()) {
+                Models.SystemInformation toRemove = db.SystemInformations.Where(x => x.hostname == hostname).FirstOrDefault();
+
+                if (toRemove != null)
+                    db.SystemInformations.Remove(toRemove);
+
+                db.SaveChanges();
+            }
+
+            return NoContent();
+        }
+        /// <summary>
         /// <para>Cleans up old system informations so the database represents reality.</para>
         /// <para>PUT url/api/cleanolderthan?days=#</para>
         /// </summary>
