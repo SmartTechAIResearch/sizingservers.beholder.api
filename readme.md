@@ -63,15 +63,17 @@ You need to be connected to the Internet for restoring NuGet packages.
 
 Execute *build DEBUG.cmd*, *build RELEASE.cmd* or the *sh*'s for when building on Linux:
 
-    rmdir /S /Q Build\Debug
+    rm -rf Build/Debug
     cd sizingservers.beholder.api
     dotnet restore
     dotnet publish -c Debug
-    dotnet ef --framework netcoreapp1.1 --configuration Debug database update
+    # If you do not specify the framework following command will not work.
+    dotnet ef --framework netcoreapp2.0 --configuration Debug database update
     cd ..
-    copy /Y Build\Debug\netcoreapp1.1\* Build\Debug
-    copy /Y Build\Debug\netcoreapp1.1\publish\* Build\Debug
-    rmdir /S /Q Build\Debug\netcoreapp1.1\
+    mv -f Build/Debug/netcoreapp2.0/publish/* Build/Debug/netcoreapp2.0
+    rmdir Build/Debug/netcoreapp2.0/publish
+    mv Build/Debug/netcoreapp2.0/* Build/Debug
+    rmdir Build/Debug/netcoreapp2.0
     
 If you do a Release build you can specify if an API key is required for communication from agents to the API. For a Debug build, communication always works without a key.
 

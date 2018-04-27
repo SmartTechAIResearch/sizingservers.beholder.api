@@ -7,55 +7,66 @@ using Microsoft.EntityFrameworkCore.Storage;
 using sizingservers.beholder.api;
 using System;
 
-namespace sizingservers.beholder.api.Migrations {
+namespace sizingservers.beholder.api.Migrations
+{
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot {
-        protected override void BuildModel(ModelBuilder modelBuilder) {
+    partial class DBContextModelSnapshot : ModelSnapshot
+    {
+        protected override void BuildModel(ModelBuilder modelBuilder)
+        {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.0.0-rtm-26452");
 
-            modelBuilder.Entity("sizingservers.beholder.api.Models.APIKey", b => {
-                b.Property<string>("emailAddress")
-                    .ValueGeneratedOnAdd();
+            modelBuilder.Entity("sizingservers.beholder.api.Models.APIKey", b =>
+                {
+                    b.Property<string>("emailAddress")
+                        .ValueGeneratedOnAdd();
 
-                b.Property<string>("key");
+                    b.Property<string>("key");
 
-                b.Property<long>("timeStampInSecondsSinceEpochUtc");
+                    b.Property<long>("timeStampInSecondsSinceEpochUtc");
 
-                b.HasKey("emailAddress");
+                    b.HasKey("emailAddress");
 
-                b.ToTable("APIKeys");
-            });
+                    b.ToTable("APIKeys");
+                });
 
-            modelBuilder.Entity("sizingservers.beholder.api.Models.SystemInformation", b => {
-                b.Property<string>("hostname")
-                    .ValueGeneratedOnAdd();
+            modelBuilder.Entity("sizingservers.beholder.api.Models.SystemInformation", b =>
+                {
+                    b.Property<string>("hostname")
+                        .ValueGeneratedOnAdd();
 
-                b.Property<string>("baseboard");
+                    b.Property<string>("baseboard");
 
-                b.Property<string>("bios");
+                    b.Property<string>("bios");
 
-                b.Property<string>("disks");
+                    b.Property<string>("disks");
 
-                b.Property<string>("ips");
+                    b.Property<string>("esxiGuestIPs");
 
-                b.Property<string>("memoryModules");
+                    b.Property<string>("esxiPassword");
 
-                b.Property<string>("nics");
+                    b.Property<string>("esxiUsername");
 
-                b.Property<string>("os");
+                    b.Property<string>("ips");
 
-                b.Property<string>("processors");
+                    b.Property<string>("memoryModules");
 
-                b.Property<string>("system");
+                    b.Property<string>("nics");
 
-                b.Property<long>("timeStampInSecondsSinceEpochUtc");
+                    b.Property<string>("os");
 
-                b.HasKey("hostname");
+                    b.Property<string>("processors");
 
-                b.ToTable("SystemInformations");
-            });
+                    b.Property<string>("system");
+
+                    b.Property<long>("timeStampInSecondsSinceEpochUtc");
+
+                    b.HasKey("hostname");
+
+                    b.ToTable("SystemInformations");
+                });
 #pragma warning restore 612, 618
         }
     }
