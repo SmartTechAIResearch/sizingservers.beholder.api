@@ -2,7 +2,7 @@
     2017 Sizing Servers Lab  
     University College of West-Flanders, Department GKG
 
-**Experimentation repo. Use sizingservers.beholder.dnfapi instead.**
+**Experimentation repo. Use sizingservers.beholder.dnfapi instead (.NET Framework API). I failed at using the VMware VSphere SDK because of compatibility issues with dotnet core. I only learned aftherwards that VCenter has a REST API. So this dotnet core API may still be of some use in further developments**
 
 
 ![flow](readme_img/flow.png)
