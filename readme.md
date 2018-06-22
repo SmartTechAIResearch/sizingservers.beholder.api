@@ -2,7 +2,7 @@
     2017 Sizing Servers Lab  
     University College of West-Flanders, Department GKG
 
-''Experimentation repo. Use sizingservers.beholder.dnfapi instead.''
+**Experimentation repo. Use sizingservers.beholder.dnfapi instead.**
 
 
 ![flow](readme_img/flow.png)
